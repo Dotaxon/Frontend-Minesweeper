@@ -1,0 +1,9 @@
+<div *ngIf="arr_Fields" class="test">
+
+    <div *ngFor="let row of arr_Fields">
+
+        <app-cell *ngFor="let cell of row" [field]="cell"></app-cell>
+
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+<button
+    class="Field"
+    (click)="onClick()"
+>
+    <span *ngIf="field.isVisible && !field.hasMine" >{{nearMineCount}}</span>
+
+    <span *ngIf="field.isVisible && field.hasMine">Mine</span>
+
+</button>
