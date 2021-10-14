@@ -1,5 +1,8 @@
 .Field{ 
     min-width: 45px;
     min-height: 35px;
-    padding: 3px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    
 }

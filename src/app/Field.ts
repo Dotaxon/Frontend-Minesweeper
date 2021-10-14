@@ -1,6 +1,7 @@
 export class Field{
     isVisible : boolean;
     hasMine : boolean;
+    nearbyMines: number = 0;
     xCord : number; //vertical     TOP-Left x=0,y=0
     yCord : number; //horizontal
 

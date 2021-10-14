@@ -20,7 +20,7 @@ export class PlaygroundService {
    */
   private getMineArray(rows : number, colums : number, mines : number): boolean[][]{
     //todo http anfrage backend
-    return [[false,false, true],[true,true,false]];
+    return [[false,false, true,true,true],[true,true,false,false,false],[false,false,false,false,false]];
   }
 
 
@@ -49,14 +49,7 @@ export class PlaygroundService {
     return arr_Fields;
   }
 
-  countMinesNearby(field :Field){
-    let x = field.xCord;
-    let y = field.yCord;
 
-   // if(y > 0 && y < )
-
-
-  }
 
 }
 

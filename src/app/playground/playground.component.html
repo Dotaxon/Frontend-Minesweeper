@@ -1,9 +1,18 @@
 <div *ngIf="arr_Fields" class="test">
 
-    <div *ngFor="let row of arr_Fields">
+    <div 
+        *ngFor="let row of arr_Fields" 
+        class="grid-container"
+        [ngStyle]="{'grid-template-columns': columsStyleString}"
+        >
 
-        <app-cell *ngFor="let cell of row" [field]="cell"></app-cell>
+        <app-cell 
+            *ngFor="let cell of row" 
+            [field]="cell" 
+            class="grid-item"
+        ></app-cell>
 
     </div>
+
 
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Field } from '../Field';
 import { PlaygroundService } from '../playground/playground.service';
 
@@ -14,16 +14,13 @@ export class CellComponent implements OnInit {
   ) { }
   
   @Input() field! : Field;
-  nearMineCount : number = 0;
 
   ngOnInit(): void {
-
-
-  }
+}
 
   onClick(){
     this.field.isVisible=true;
-    console.log(this.field);
+    console.log(this.field); 
   }
 
 }

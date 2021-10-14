@@ -1,9 +1,8 @@
-<button
+<div
     class="Field"
     (click)="onClick()"
 >
-    <span *ngIf="field.isVisible && !field.hasMine" >{{nearMineCount}}</span>
+    <span *ngIf="field.isVisible && !field.hasMine" >{{field.nearbyMines}}</span>
 
     <span *ngIf="field.isVisible && field.hasMine">Mine</span>
-
-</button>
+</div>
