@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CellComponent } from './cell/cell.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CellComponent } from './cell/cell.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -33,6 +33,7 @@ export class PlaygroundComponent implements OnInit {
       this.columsStyleString += "1fr ";
       
     }
+    console.log("test");
   }
 
   ngOnInit(): void {}
