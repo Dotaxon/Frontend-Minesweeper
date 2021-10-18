@@ -1,15 +1,23 @@
-<div *ngIf="arr_Fields" class="test">
+<div 
+    *ngIf="arr_Fields" 
+    class="playground"
+    [ngStyle]= "{
+        'padding' : playgroundPaddingStyle,
+        'width' : playgroundWidthStyle,
+        'max-height' : playgroundHeightStyle}"
+
+>
 
     <div 
         *ngFor="let row of arr_Fields" 
         class="grid-container"
-        [ngStyle]="{'grid-template-columns': columsStyleString}"
+        [ngStyle]="{
+            'grid-template-columns': columnsStyleString}"
         >
 
         <app-cell 
             *ngFor="let cell of row" 
             [field]="cell" 
-            class="grid-item"
             (emitter) = "handleCellClick($event)"
         ></app-cell>
 

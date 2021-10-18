@@ -1,7 +1,11 @@
 <div
-    class="Field"
+    class="cell"
     (click)="onClick()"
     (contextmenu)="onRightClick()"
+    [ngClass]="{'opened':field.isVisible}"
+    [ngStyle]="{
+        'max-width': cellWidth,
+        'max-height': cellHeight}"
 >
     <span *ngIf="field.isVisible && !field.hasMine" >{{field.nearbyMines}}</span>
 

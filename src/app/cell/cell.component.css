@@ -1,8 +1,22 @@
-.Field{ 
-    min-width: 45px;
-    min-height: 35px;
-    border-color: black;
-    border-style: solid;
+.cell{ 
+    width: cellHeight;
+    height: 34px;
+    background-color: rgba(235, 235, 235, 0.5);
+    border-color: rgb(202, 202, 202);
+    border-style: outset;
     text-align: center;
     
+}
+.cell:hover{
+    border-style: inset;
+}
+
+.opened{
+    background-color:rgba(235, 235, 235, 0.5) ;
+    border-color: rgb(202, 202, 202);
+    border-style: solid;
+}
+
+.opened:hover{
+    border-style: solid;
 }

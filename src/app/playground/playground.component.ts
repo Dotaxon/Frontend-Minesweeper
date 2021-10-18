@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CellComponent } from '../cell/cell.component';
 import { Field } from '../Field';
 import { PlaygroundService } from './playground.service';
 
@@ -9,26 +10,49 @@ import { PlaygroundService } from './playground.service';
 })
 export class PlaygroundComponent implements OnInit {
 
-  rows : number = 0;
-  columns : number = 0;
-  mines : number = 0; 
+  rows : number ;
+  columns : number ;
+  mines : number ; 
   countInvisibleFields : number = NaN; //wenn null dann gibt es keine Felder mehr die angeklickt werden können -> spiel zuende 
-  columsStyleString : string = ""; //ist dafür dar um einen String zu haben der den css Style beschreibt
-                                    //verwendet in playground.component.html
-
   arr_Fields : Field[][] = [];
+ 
+  //Style attributes unit px!!
+  columnsStyleString : string = ""; //ist dafür dar um einen String zu haben der den css Style beschreibt
+                                    //verwendet in playground.component.html
+  playgroundWidthStyle ;
+  playgroundHeightStyle  ;
+  playgroundPaddingStyle ;
+  
+
 
   constructor(private playgroundService : PlaygroundService) { 
+    this.rows = 10;
+    this.columns = 10;
+    this.mines = 5;
+    this.countInvisibleFields = this.rows * this.columns;
+
+    
+    //styles
+    for (let i = 0; i < this.columns; i++) //um columnsStyleString zu erstellen 
+      this.columnsStyleString += "1fr ";    
+    this.playgroundPaddingStyle = "8px";
+
+
+    //Werte ohne Einheit holen
+    let cellWidth = +CellComponent.cellWidth.replace("px","");
+    let cellHeight = +CellComponent.cellHeight.replace("px","");
+    let paddingSize = +this.playgroundPaddingStyle.replace("px","");
+
+    //berechnet die größe des Playgrounds
+    this.playgroundWidthStyle = (cellWidth*this.columns + paddingSize*2) + "px";
+    this.playgroundHeightStyle = (cellHeight*this.rows + paddingSize*2) + "px";
+
+    console.log(this.playgroundWidthStyle);
+    console.log(this.playgroundHeightStyle);
 
   }
 
   async ngOnInit(): Promise<void> { 
-    this.rows = 5;
-    this.columns = 5;
-    this.mines = 5;
-    this.countInvisibleFields = this.rows * this.columns;
-
-
     this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
 
 
@@ -38,15 +62,14 @@ export class PlaygroundComponent implements OnInit {
            
       }
     }
-
-    for (let i = 0; i < this.columns; i++) {
-      this.columsStyleString += "1fr ";
-      
-    }
   }
 
-
-  handleCellClick(field : Field){
+  /**Händelt den Click auf einem field (cell)
+   * 
+   * @param field das field welches gedrückt wurde
+   * @returns 
+   */
+  handleCellClick(field : Field) : void{
     if (field.isVisible) return; //Feld wurde schon angeklickt
 
     field.isVisible = true;
@@ -66,7 +89,7 @@ export class PlaygroundComponent implements OnInit {
           if (i == 0 && j == 0) continue; //überspringt das mittlere Feld, also jenes welches angeklickt wurde
           try {
 
-            if (this.arr_Fields[y-i][x-j].isVisible) continue; //wenn das Feldschon sichtbar ist muss es nicht mehr sichtbar gemacht werden         
+            if (this.arr_Fields[y-i][x-j].isVisible) continue; //wenn das Feld schon sichtbar ist muss es nicht mehr sichtbar gemacht werden         
             this.arr_Fields[y-i][x-j].isVisible = true;
             this.countInvisibleFields--;
 
