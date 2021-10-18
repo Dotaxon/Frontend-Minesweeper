@@ -1,6 +1,11 @@
 .Canvas{
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    background-color: rgb(224, 224, 224);
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+
+    border-style: ridge;
+    border-radius: 3px;
 }

@@ -1,8 +1,4 @@
 button{
     width: 100%;
-}
-.NewButtonPane{
-    background-color: rgba(194, 194, 194, 0.5);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-color: rgb(202, 202, 202);
 }
