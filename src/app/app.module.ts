@@ -8,13 +8,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CellComponent } from './cell/cell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewGameButtonComponent } from './new-game-button/new-game-button.component';
+import { StatusComponent } from './status/status.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlaygroundComponent,
     CellComponent,
-    NewGameButtonComponent
+    NewGameButtonComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
