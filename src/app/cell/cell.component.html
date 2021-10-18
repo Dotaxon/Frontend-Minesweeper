@@ -1,9 +1,13 @@
 <div
-    class="Field"
+    class="cell"
     (click)="onClick()"
     (contextmenu)="onRightClick()"
+    [ngClass]="{
+        'opened' : field.isVisible
+        
+    }"
 >
     <span *ngIf="field.isVisible && !field.hasMine" >{{field.nearbyMines}}</span>
 
-    <span *ngIf="field.isVisible && field.hasMine">Mine</span>
+    <img *ngIf="field.isVisible && field.hasMine" calss="cell__image" src="./emojis/pileofpoop.png" >
 </div>

@@ -15,6 +15,7 @@ export class CellComponent implements OnInit {
   
   @Input() field! : Field;
   @Output() emitter = new EventEmitter<Field>();
+  
 
   ngOnInit(): void {
   }

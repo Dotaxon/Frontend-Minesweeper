@@ -6,3 +6,37 @@
     text-align: center;
     
 }
+.cell {
+    height: 30px;
+    width: 30px;
+    background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 2px;
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+    user-select: none;
+
+
+}
+
+.cell__image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+.opened {
+    
+    background-color: shade(grey, 2%);
+    border-top: 1px solid shade(grey, 10%);
+    border-right: 1px solid shade(grey, 10%);
+    border-bottom: 1px solid shade(grey, 10%);
+    border-left: 1px solid shade(grey, 10%);
+    border-radius: 0;
+
+
+}
