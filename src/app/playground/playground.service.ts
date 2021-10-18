@@ -24,9 +24,9 @@ export class PlaygroundService {
    * @returns Boolean 2D Array [row][colum]
    */
   private  getMineArray(rows : number, columns : number, mines : number): Observable<boolean[][]>{
-    //console.log(this.backendURL + `?rows=${rows}&colums=${colums}&mines=${mines}`);
     
     let returnVal =  this.http.get<boolean[][]>("http://localhost:3000/?rows="+rows+"&columns="+columns+"&mines="+mines);
+
     console.log("http://localhost:3000/?rows="+rows+"&columns="+columns+"&mines="+mines);
 
     return returnVal;
