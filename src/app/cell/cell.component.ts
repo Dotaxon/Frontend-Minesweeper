@@ -16,7 +16,7 @@ export class CellComponent implements OnInit {
   @Input() field! : Field;
 
   ngOnInit(): void {
-}
+  }
 
   onClick(){
     this.field.isVisible=true;
