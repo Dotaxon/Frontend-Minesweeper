@@ -4,7 +4,7 @@
     [ngStyle]= "{
         'padding' : playgroundPaddingStyle,
         'width' : playgroundWidthStyle,
-        'max-height' : playgroundHeightStyle}"
+        'height' : 'playgroundHeightStyle'}"
 
 >
 
@@ -18,7 +18,8 @@
         <app-cell 
             *ngFor="let cell of row" 
             [field]="cell" 
-            (emitter) = "handleCellClick($event)"
+            (leftClickEmitter) = "handleLeftClick($event)"
+            (rightClickEmitter) = "handleRightClick($event)"
         ></app-cell>
 
     </div>

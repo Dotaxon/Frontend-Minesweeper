@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Field } from '../Field';
-import { PlaygroundService } from '../playground/playground.service';
+
 
 @Component({
   selector: 'app-cell',
@@ -11,13 +11,18 @@ export class CellComponent implements OnInit {
 
   private static _cellWidth: string = "34px";
   private static _cellHeight: string = "34px";
+  borderWidth : string = "3.5px";
+
   
   @Input() field! : Field;
-  @Output() emitter = new EventEmitter<Field>();
+  @Output() leftClickEmitter = new EventEmitter<Field>();
+  @Output() rightClickEmitter = new EventEmitter<Field>();
   
   
-  
-  constructor(private playgroundService : PlaygroundService) { }
+  constructor() { 
+
+
+  }
   
   
   
@@ -26,13 +31,17 @@ export class CellComponent implements OnInit {
   }
   
   onClick(){
-    //this.field.isVisible=true;
-    this.emitter.emit(this.field);
-    console.log(this.field); 
+    this.leftClickEmitter.emit(this.field);
   }
   
+  /**Reagiert auf rechtsklick
+   * 
+   * @returns wenn false wird das Contextmenu des Browsers unterdrückt
+   */
   onRightClick(){
-    return false;
+    this.rightClickEmitter.emit(this.field);
+
+    return false; 
   }
   
   public get cellHeight(): string {

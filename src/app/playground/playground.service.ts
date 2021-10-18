@@ -52,7 +52,7 @@ export class PlaygroundService {
 
         for (let j = 0; j < columns; j++) {
 
-          let field : Field = new Field(j,i,false, arr_Mines[i][j]);
+          let field : Field = new Field(j,i,false,false, arr_Mines[i][j]);
           arr_Fields[i][j] = field;
         }
     }

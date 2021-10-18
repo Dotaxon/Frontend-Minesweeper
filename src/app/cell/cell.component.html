@@ -2,12 +2,19 @@
     class="cell"
     (click)="onClick()"
     (contextmenu)="onRightClick()"
-    [ngClass]="{'opened':field.isVisible}"
+    [ngClass]="{'opened':field.isVisible,
+                'flagged': field.isFlagged}"
     [ngStyle]="{
-        'max-width': cellWidth,
-        'max-height': cellHeight}"
+        'width': cellWidth,
+        'height': cellHeight,
+        'border-width' : borderWidth }"
 >
     <span *ngIf="field.isVisible && !field.hasMine && field.nearbyMines != 0" >{{field.nearbyMines}}</span>
 
-    <img *ngIf="field.isVisible && field.hasMine" src="./emojis/pileofpoop.png" >
+    <img *ngIf="field.isVisible && field.hasMine" 
+        src="assets/emojis/mine.png">
+    <img *ngIf="!field.isVisible && field.isFlagged"
+        src="assets/emojis/triangularflagonpost.png">
+    
+
 </div>

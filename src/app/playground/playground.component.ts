@@ -47,8 +47,7 @@ export class PlaygroundComponent implements OnInit {
     this.playgroundWidthStyle = (cellWidth*this.columns + paddingSize*2) + "px";
     this.playgroundHeightStyle = (cellHeight*this.rows + paddingSize*2) + "px";
 
-    console.log(this.playgroundWidthStyle);
-    console.log(this.playgroundHeightStyle);
+
 
   }
 
@@ -69,8 +68,9 @@ export class PlaygroundComponent implements OnInit {
    * @param field das field welches gedrückt wurde
    * @returns 
    */
-  handleCellClick(field : Field) : void{
+  handleLeftClick(field : Field) : void{
     if (field.isVisible) return; //Feld wurde schon angeklickt
+    if (field.isFlagged) return; //ein Geflaggtes Feld kann nicht geklickt werden
 
     field.isVisible = true;
     this.countInvisibleFields--;
@@ -96,7 +96,7 @@ export class PlaygroundComponent implements OnInit {
             if(this.arr_Fields[y-i][x-j].nearbyMines == 0) {
               this.arr_Fields[y-i][x-j].isVisible = false; //damit die if Abfrage in handleCellClick nicht greift
               this.countInvisibleFields++; // damit der counter auf dem richtigen stand bleibt
-              this.handleCellClick(this.arr_Fields[y-i][x-j]);
+              this.handleLeftClick(this.arr_Fields[y-i][x-j]);
             }
           } catch (error) {}          
         }     
@@ -107,6 +107,12 @@ export class PlaygroundComponent implements OnInit {
       this.gameHasBeenWon();
     } 
 
+  }
+
+  handleRightClick(field : Field): void{
+    if (field.isVisible) return; //Sichtbares Feld kann nicht geflaggt werden
+    
+    field.isFlagged = !field.isFlagged;
   }
 
   gameOver(){
@@ -134,7 +140,7 @@ export class PlaygroundComponent implements OnInit {
         if (i == 0 && j == 0) continue;
         try {
           if (this.arr_Fields[y+i][x+j].hasMine) count++;
-          //console.log(this.arr_Fields[y+i][x+j]);
+
 
         } catch (error) {}          
       }     
