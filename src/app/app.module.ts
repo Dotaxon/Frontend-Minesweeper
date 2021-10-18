@@ -7,12 +7,14 @@ import { PlaygroundComponent } from './playground/playground.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CellComponent } from './cell/cell.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NewGameButtonComponent } from './new-game-button/new-game-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlaygroundComponent,
-    CellComponent
+    CellComponent,
+    NewGameButtonComponent
   ],
   imports: [
     BrowserModule,
