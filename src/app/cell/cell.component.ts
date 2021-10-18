@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Field } from '../Field';
 import { PlaygroundService } from '../playground/playground.service';
 
@@ -14,13 +14,19 @@ export class CellComponent implements OnInit {
   ) { }
   
   @Input() field! : Field;
+  @Output() emitter = new EventEmitter<Field>();
 
   ngOnInit(): void {
   }
 
   onClick(){
-    this.field.isVisible=true;
+    //this.field.isVisible=true;
+    this.emitter.emit(this.field);
     console.log(this.field); 
+  }
+
+  onRightClick(){
+    return false;
   }
 
 }

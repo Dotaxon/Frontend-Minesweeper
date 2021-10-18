@@ -10,6 +10,7 @@
             *ngFor="let cell of row" 
             [field]="cell" 
             class="grid-item"
+            (emitter) = "handleCellClick($event)"
         ></app-cell>
 
     </div>

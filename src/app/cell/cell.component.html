@@ -1,6 +1,7 @@
 <div
     class="Field"
     (click)="onClick()"
+    (contextmenu)="onRightClick()"
 >
     <span *ngIf="field.isVisible && !field.hasMine" >{{field.nearbyMines}}</span>
 
