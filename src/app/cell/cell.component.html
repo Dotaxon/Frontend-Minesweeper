@@ -7,7 +7,7 @@
         'max-width': cellWidth,
         'max-height': cellHeight}"
 >
-    <span *ngIf="field.isVisible && !field.hasMine" >{{field.nearbyMines}}</span>
+    <span *ngIf="field.isVisible && !field.hasMine && field.nearbyMines != 0" >{{field.nearbyMines}}</span>
 
     <img *ngIf="field.isVisible && field.hasMine" calss="cell__image" src="./emojis/pileofpoop.png" >
 </div>
