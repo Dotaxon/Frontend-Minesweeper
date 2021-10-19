@@ -1,3 +1,20 @@
-<div>
+<div class="StatusContainer">
+    <div class="Difficulty">
+        Difficulty
+    </div>
+    <div class="Status">
+        <img class="StatusEmoji" [src]=" true ? 'assets/emojis/smiling-face-with-sunglasses.png' : 'assets/emojis/grinning-face.png'">
+    </div>
+    <div class="StatusVariables">
 
+        <div>
+            <img class="StatusVariables__Image" src="assets/emojis/triangularflagonpost.png">
+            <span class="StatusVariables__Number">{{valueFlags}}</span>
+        </div>
+        <div>
+            <img class="StatusVariables__Image" src="assets/emojis/stopwatch.png">
+            <span class="StatusVariables__Number">{{valueTime}}</span>
+        </div>
+    </div>
 </div>
+
