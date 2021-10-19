@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameStatus } from '../GameStatus';
 import { InformationService } from '../information.service';
 
 @Component({
@@ -8,26 +9,27 @@ import { InformationService } from '../information.service';
 })
 export class StatusComponent implements OnInit {
 
-  private _valueFlags = "000";
-  private _valueTime = "000";
+  private _valueFlags : string = "000"; 
+  public time$ = this.infoService.getTime();
+  gameStatusEnum = GameStatus;
   
-  constructor(private infoService : InformationService) { }
+  
+  
+  constructor(private infoService : InformationService) {
+    this.infoService.getFlagCount().subscribe(value => this._valueFlags = String(value));
+    
+  }
   
   ngOnInit(): void {
+    
   }
-
-
   
-  public get valueFlags() {
+  
+  
+  public getGameStatus() {
+    return this.infoService.gameStatus;
+  }
+  public get valueFlags() : string {
     return this._valueFlags;
-  }
-  public set valueFlags(value) {
-    this._valueFlags = value;
-  }
-  public get valueTime() {
-    return this._valueTime;
-  }
-  public set valueTime(value) {
-    this._valueTime = value;
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CellComponent } from '../cell/cell.component';
 import { Field } from '../Field';
+import { GameStatus } from '../GameStatus';
+import { InformationService } from '../information.service';
 import { PlaygroundService } from './playground.service';
 
 @Component({
@@ -13,7 +15,8 @@ export class PlaygroundComponent implements OnInit {
   rows : number ;
   columns : number ;
   mines : number ; 
-  countInvisibleFields : number = NaN; //wenn null dann gibt es keine Felder mehr die angeklickt werden können -> spiel zuende 
+  countInvisibleFields : number = NaN; //wenn null dann gibt es keine Felder mehr die angeklickt werden können -> spiel zuende
+  flagCount : number; //Es gibt soviele Flaggen wie Minen flagCount zählt runter 
   arr_Fields : Field[][] = [];
  
   //Style attributes unit px!!
@@ -27,10 +30,16 @@ export class PlaygroundComponent implements OnInit {
   private static _playgroundPaddingStyle: string;
   
   
-  constructor(private playgroundService : PlaygroundService) { 
+  constructor(
+      private playgroundService : PlaygroundService,
+      private infoService : InformationService
+    ) { 
     this.rows = 10;
     this.columns = 10;
     this.mines = 5;
+    this.flagCount = this.mines;
+    this.infoService.nextFlagCountValue(this.flagCount);
+    
     this.countInvisibleFields = this.rows * this.columns;
     
     
@@ -58,14 +67,15 @@ export class PlaygroundComponent implements OnInit {
   
   async ngOnInit(): Promise<void> { 
     this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
-    
-    
+  
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
         this.countMinesNearbyBetter(this.arr_Fields[i][j]);  
         
       }
     }
+
+
   }
   
   /**Händelt den Click auf einem field (cell)
@@ -76,7 +86,11 @@ export class PlaygroundComponent implements OnInit {
   handleLeftClick(field : Field) : void{
     if (field.isVisible) return; //Feld wurde schon angeklickt
     if (field.isFlagged) return; //ein Geflaggtes Feld kann nicht geklickt werden
+    if (!this.infoService.isTimeRunning) { //speichert Zeitpunkt des ersten Klicks
+      this.infoService.isTimeRunning = true;
+    }
     
+
     field.isVisible = true;
     this.countInvisibleFields--;
     
@@ -108,23 +122,44 @@ export class PlaygroundComponent implements OnInit {
       }
     }
     
-    if (this.countInvisibleFields <= this.mines){
+    if (this.countInvisibleFields <= this.mines && this.flagCount <= 0){ //Gewinn Bedinung
       this.gameHasBeenWon();
     } 
     
   }
 
   handleRightClick(field : Field): void{
-    if (field.isVisible) return; //Sichtbares Feld kann nicht geflaggt werden
-    
-    field.isFlagged = !field.isFlagged;
+    if (field.isVisible) return; //Sichtbares Feld kann nicht geflaggt/deflaggt werden
+    if (!this.infoService.isTimeRunning) { //speichert Zeitpunkt des ersten Klicks
+      this.infoService.isTimeRunning = true;
+    }
+
+    if (field.isFlagged){ //Flage entfernen deflaggen
+      this.flagCount++;
+      field.isFlagged = false;
+      this.infoService.nextFlagCountValue(this.flagCount);
+    }
+    else if(!field.isFlagged && this.flagCount > 0){//Flagge setzen
+      this.flagCount--;
+      field.isFlagged = true;
+      this.infoService.nextFlagCountValue(this.flagCount);
+    }
+
+    if (this.countInvisibleFields <= this.mines && this.flagCount <= 0){ //Gewinn Bedinung
+      this.gameHasBeenWon();
+    } 
+
   }
   
   gameOver(){
+    this.infoService.isTimeRunning = false;
+    this.infoService.gameStatus = GameStatus.lost;
     console.log("Game Over");
   }
   
   gameHasBeenWon(){
+    this.infoService.isTimeRunning = false;
+    this.infoService.gameStatus = GameStatus.won;
     console.log("Winner");
   }
   
