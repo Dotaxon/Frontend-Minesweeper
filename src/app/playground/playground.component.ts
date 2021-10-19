@@ -18,6 +18,7 @@ export class PlaygroundComponent implements OnInit {
   countInvisibleFields : number = NaN; //wenn null dann gibt es keine Felder mehr die angeklickt werden können -> spiel zuende
   flagCount : number; //Es gibt soviele Flaggen wie Minen flagCount zählt runter 
   arr_Fields : Field[][] = [];
+
  
   //Style attributes unit px!!
   columnsStyleString : string = ""; //ist dafür dar um einen String zu haben der den css Style beschreibt
@@ -39,7 +40,6 @@ export class PlaygroundComponent implements OnInit {
     this.mines = 5;
     this.flagCount = this.mines;
     this.infoService.nextFlagCountValue(this.flagCount);
-    
     this.countInvisibleFields = this.rows * this.columns;
     
     
@@ -84,6 +84,7 @@ export class PlaygroundComponent implements OnInit {
    * @returns 
    */
   handleLeftClick(field : Field) : void{
+    if (this.infoService.gameStatus != GameStatus.playing) return; //wenn spiel zu ende
     if (field.isVisible) return; //Feld wurde schon angeklickt
     if (field.isFlagged) return; //ein Geflaggtes Feld kann nicht geklickt werden
     if (!this.infoService.isTimeRunning) { //speichert Zeitpunkt des ersten Klicks
@@ -129,6 +130,7 @@ export class PlaygroundComponent implements OnInit {
   }
 
   handleRightClick(field : Field): void{
+    if (this.infoService.gameStatus != GameStatus.playing) return; //wenn spiel zu ende
     if (field.isVisible) return; //Sichtbares Feld kann nicht geflaggt/deflaggt werden
     if (!this.infoService.isTimeRunning) { //speichert Zeitpunkt des ersten Klicks
       this.infoService.isTimeRunning = true;

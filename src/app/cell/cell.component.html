@@ -3,7 +3,8 @@
     (click)="onClick()"
     (contextmenu)="onRightClick()"
     [ngClass]="{'opened':field.isVisible,
-                'flagged': field.isFlagged}"
+                'flagged': field.isFlagged,
+                'notPlaying' : getGameStatus() != gameStatusEnum.playing}"
     [ngStyle]="{
         'width': cellWidth,
         'height': cellHeight,

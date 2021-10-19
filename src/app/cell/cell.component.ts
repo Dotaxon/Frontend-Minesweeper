@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Field } from '../Field';
+import { GameStatus } from '../GameStatus';
+import { InformationService } from '../information.service';
 
 
 @Component({
@@ -12,14 +14,14 @@ export class CellComponent implements OnInit {
   private static _cellWidth: string = "34px";
   private static _cellHeight: string = "34px";
   borderWidth : string = "3.5px";
-
+  gameStatusEnum = GameStatus;
   
   @Input() field! : Field;
   @Output() leftClickEmitter = new EventEmitter<Field>();
   @Output() rightClickEmitter = new EventEmitter<Field>();
   
   
-  constructor() { 
+  constructor(private infoService : InformationService) { 
 
 
   }
@@ -44,6 +46,10 @@ export class CellComponent implements OnInit {
     return false; 
   }
   
+  getGameStatus(){
+    return this.infoService.gameStatus;
+  }
+
   public get cellHeight(): string {
     return CellComponent._cellHeight;
   }
