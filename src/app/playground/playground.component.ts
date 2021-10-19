@@ -3,6 +3,7 @@ import { CellComponent } from '../cell/cell.component';
 import { Field } from '../Field';
 import { GameStatus } from '../GameStatus';
 import { InformationService } from '../information.service';
+import { ResetService } from '../new-game-button/reset.service';
 import { PlaygroundService } from './playground.service';
 
 @Component({
@@ -33,19 +34,33 @@ export class PlaygroundComponent implements OnInit {
   
   constructor(
       private playgroundService : PlaygroundService,
-      private infoService : InformationService
+      private infoService : InformationService,
+      private resetService : ResetService
     ) { 
     this.rows = 10;
     this.columns = 10;
     this.mines = 5;
     this.flagCount = this.mines;
-    this.infoService.nextFlagCountValue(this.flagCount);
     this.countInvisibleFields = this.rows * this.columns;
     
-    
+    //InfoService configurieren
+    this.infoService.nextFlagCountValue(this.flagCount);
+    this.infoService.gameStatus = GameStatus.playing;
+    this.infoService.isTimeRunning = false;
+    this.infoService.nextTime(0); //Zeit auf null setzen
+
+    //Reset Service configurieren/subscriben 
+    this.resetService.isReset.next(false); //sichergehen das false
+    this.resetService.isReset.subscribe(isReset => {
+      if(isReset){
+        this.resetPlayground();
+      }
+    })
+
+
     //styles
     for (let i = 0; i < this.columns; i++) //um columnsStyleString zu erstellen 
-    this.columnsStyleString += "1fr ";    
+      this.columnsStyleString += "1fr ";    
     this.playgroundPaddingStyle = "8px";
     
     
@@ -65,7 +80,8 @@ export class PlaygroundComponent implements OnInit {
     
   }
   
-  async ngOnInit(): Promise<void> { 
+  async ngOnInit(): Promise<void> {
+
     this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
   
     for (let i = 0; i < this.rows; i++) {
@@ -77,6 +93,67 @@ export class PlaygroundComponent implements OnInit {
 
 
   }
+
+  resetPlayground(){
+    this.rows = 10;
+    this.columns = 10;
+    this.mines = 5;
+    this.flagCount = this.mines;
+    this.countInvisibleFields = this.rows * this.columns;
+    
+    //InfoService configurieren
+    this.infoService.nextFlagCountValue(this.flagCount);
+    this.infoService.gameStatus = GameStatus.playing;
+    this.infoService.isTimeRunning = false;
+    this.infoService.nextTime(0); //Zeit auf null setzen
+
+    //Reset Service configurieren/subscriben 
+    this.resetService.isReset.next(false); //sichergehen das false
+    this.resetService.isReset.subscribe(isReset => {
+      if(isReset){
+        this.resetPlayground();
+      }
+    })
+
+
+    //styles
+    for (let i = 0; i < this.columns; i++) //um columnsStyleString zu erstellen 
+      this.columnsStyleString += "1fr ";    
+    this.playgroundPaddingStyle = "8px";
+    
+    
+    //Werte ohne Einheit holen
+    let cellWidth = +CellComponent.cellWidth.replace("px","");
+    let cellHeight = +CellComponent.cellHeight.replace("px","");
+    let paddingSize = +this.playgroundPaddingStyle.replace("px","");
+    
+    //berechnet die größe des Playgrounds
+    this.playgroundWidthStyle = (cellWidth*this.columns + paddingSize*2) + "px";
+    this.playgroundHeightStyle = (cellHeight*this.rows + paddingSize*2) + "px";
+    
+    //Statische Attribute initzialisieren
+    PlaygroundComponent._playgroundWidthStyle = this.playgroundWidthStyle;
+    PlaygroundComponent._playgroundHeightStyle = this.playgroundHeightStyle;
+    PlaygroundComponent._playgroundPaddingStyle = this.playgroundPaddingStyle;
+    
+    this.arr_Fields = [];
+    //this.resetPlaygroundAsync();
+    this.ngOnInit();
+  }
+
+  async resetPlaygroundAsync() : Promise<void>{
+
+    this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
+  
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
+        this.countMinesNearbyBetter(this.arr_Fields[i][j]);  
+        
+      }
+    }
+
+  }
+
   
   /**Händelt den Click auf einem field (cell)
    * 
