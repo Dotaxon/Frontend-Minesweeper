@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CellComponent } from '../cell/cell.component';
 import { Field } from '../Field';
-import { GameStatus } from '../GameStatus';
+import { GameLevel, GameStatus } from '../Enums';
 import { InformationService } from '../information.service';
 import { ResetService } from '../new-game-button/reset.service';
 import { PlaygroundService } from './playground.service';
@@ -37,9 +37,22 @@ export class PlaygroundComponent implements OnInit {
       private infoService : InformationService,
       private resetService : ResetService
     ) { 
-    this.rows = 10;
-    this.columns = 10;
-    this.mines = 5;
+    if(this.infoService.gameLevel == GameLevel.hard){
+      this.rows = 30;
+      this.columns = 16;
+      this.mines = 10;
+    }
+    else if (this.infoService.gameLevel == GameLevel.normal){
+      this.rows = 15;
+      this.columns = 13;
+      this.mines = 40;
+    }
+    else{ //GameLevel is easy
+      this.rows = 10;
+      this.columns = 10;
+      this.mines = 10;
+    }
+
     this.flagCount = this.mines;
     this.countInvisibleFields = this.rows * this.columns;
     
@@ -95,9 +108,21 @@ export class PlaygroundComponent implements OnInit {
   }
 
   resetPlayground(){
-    this.rows = 10;
-    this.columns = 10;
-    this.mines = 5;
+    if(this.infoService.gameLevel == GameLevel.hard){
+      this.rows = 16;
+      this.columns = 30;
+      this.mines = 99;
+    }
+    else if (this.infoService.gameLevel == GameLevel.normal){
+      this.rows = 15;
+      this.columns = 13;
+      this.mines = 40;
+    }
+    else{ //GameLevel is easy
+      this.rows = 10;
+      this.columns = 10;
+      this.mines = 10;
+    }
     this.flagCount = this.mines;
     this.countInvisibleFields = this.rows * this.columns;
     

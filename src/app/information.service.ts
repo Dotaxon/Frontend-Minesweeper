@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription, timer} from 'rxjs';
-import { GameStatus } from './GameStatus';
+import { GameLevel, GameStatus } from './Enums';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class InformationService {
   private timerSub : Subscription | undefined
 
   gameStatus = GameStatus.playing;
+  gameLevel = GameLevel.easy;
   
   constructor() { }
   

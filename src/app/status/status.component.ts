@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStatus } from '../GameStatus';
+import { GameLevel, GameStatus } from '../Enums';
 import { InformationService } from '../information.service';
 
 @Component({
@@ -12,10 +12,12 @@ export class StatusComponent implements OnInit {
   private _valueFlags : string = "000"; 
   public time$ = this.infoService.getTime();
   gameStatusEnum = GameStatus;
+  gameLevelEnum = GameLevel;
+
   
   
   
-  constructor(private infoService : InformationService) {
+  constructor(public infoService : InformationService) {
     this.infoService.getFlagCount().subscribe(value => this._valueFlags = String(value));
     
   }
@@ -24,8 +26,11 @@ export class StatusComponent implements OnInit {
     
   }
   
+  onDifficultyChange(level : any){
+    console.log(level);
+  }
   
-  
+
   public getGameStatus() {
     return this.infoService.gameStatus;
   }

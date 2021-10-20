@@ -9,14 +9,13 @@ import { ResetService } from './reset.service';
 })
 export class NewGameButtonComponent implements OnInit {
 
-  widthStyle : string;
+
   heightStyle: string;
   paddingSizeStyle :string;
 
   constructor(
     private resetService : ResetService
-  ) { 
-    this.widthStyle = PlaygroundComponent.playgroundWidthStyle;
+  ) {    
     this.heightStyle = "40px"
     this.paddingSizeStyle = PlaygroundComponent.playgroundPaddingStyle;
   }
