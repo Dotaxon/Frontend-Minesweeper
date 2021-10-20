@@ -4,6 +4,8 @@ export class Field{
     nearbyMines: number = 0;
     isFlagged : boolean ;
     isWrongFlagged : boolean = false;
+    hasBeenClicked : boolean = false;
+    hasBeenWrongClicked : boolean = false;
     xCord : number; //vertical     TOP-Left x=0,y=0
     yCord : number; //horizontal
 

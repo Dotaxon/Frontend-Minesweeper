@@ -21,6 +21,12 @@
 .opened:hover{
     border-style: solid !important;
 }
+.hasBeenRightClicked{
+    background-color:rgba(152, 207, 135, 0.644) ;
+}
+.hasBeenWrongClicked{
+    background-color:rgba(207, 135, 135, 0.644) ;
+}
 img{
     width: 90%;
 }

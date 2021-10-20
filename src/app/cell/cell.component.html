@@ -4,7 +4,9 @@
     (contextmenu)="onRightClick()"
     [ngClass]="{'opened':field.isVisible,
                 'flagged': field.isFlagged,
-                'notPlaying' : getGameStatus() != gameStatusEnum.playing}"
+                'notPlaying' : getGameStatus() != gameStatusEnum.playing,
+                'hasBeenRightClicked' : field.hasBeenClicked && !field.hasBeenWrongClicked && getGameStatus() != gameStatusEnum.playing,
+                'hasBeenWrongClicked' : field.hasBeenWrongClicked && getGameStatus() != gameStatusEnum.playing}"
     [ngStyle]="{
         'width': cellWidth,
         'height': cellHeight,

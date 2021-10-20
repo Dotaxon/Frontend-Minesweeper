@@ -1,11 +1,24 @@
-.Canvas{
+.Minesweeper{
     display: flex;
     flex-direction: column;
     background-color: rgb(224, 224, 224);
     width: fit-content;
     height: fit-content;
-    margin: auto;
-
     border-style: ridge;
     border-radius: 3px;
+
+    
+}
+
+.Canvas{
+    color:rgb(168, 168, 168);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+#content{
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }

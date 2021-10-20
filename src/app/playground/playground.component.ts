@@ -178,11 +178,13 @@ export class PlaygroundComponent implements OnInit {
       this.infoService.isTimeRunning = true;
     }
     
+    field.hasBeenClicked = true; //zeigt das Feld schon mal angeklickt wurde 
 
     field.isVisible = true;
     this.countInvisibleFields--;
     
     if (field.hasMine){ //spiel zu ende
+      field.hasBeenWrongClicked = true;
       this.gameOver();
       return;
     }
@@ -198,6 +200,7 @@ export class PlaygroundComponent implements OnInit {
             
             if (this.arr_Fields[y-i][x-j].isVisible) continue; //wenn das Feld schon sichtbar ist muss es nicht mehr sichtbar gemacht werden         
             this.arr_Fields[y-i][x-j].isVisible = true;
+            this.arr_Fields[y-i][x-j].hasBeenClicked = true;
             this.countInvisibleFields--;
             
             if(this.arr_Fields[y-i][x-j].nearbyMines == 0) {
@@ -226,11 +229,13 @@ export class PlaygroundComponent implements OnInit {
     if (field.isFlagged){ //Flage entfernen deflaggen
       this.flagCount++;
       field.isFlagged = false;
+      field.hasBeenClicked = false;
       this.infoService.nextFlagCountValue(this.flagCount);
     }
     else if(!field.isFlagged && this.flagCount > 0){//Flagge setzen
       this.flagCount--;
       field.isFlagged = true;
+      field.hasBeenClicked = true;
       this.infoService.nextFlagCountValue(this.flagCount);
     }
 
@@ -252,8 +257,10 @@ export class PlaygroundComponent implements OnInit {
         
         if(this.arr_Fields[i][j].isFlagged){
 
-          if (!this.arr_Fields[i][j].hasMine) 
+          if (!this.arr_Fields[i][j].hasMine){
             this.arr_Fields[i][j].isWrongFlagged = true;
+            this.arr_Fields[i][j].hasBeenWrongClicked = true;
+          } 
 
           continue;
         }
