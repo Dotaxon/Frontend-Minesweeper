@@ -243,6 +243,28 @@ export class PlaygroundComponent implements OnInit {
   gameOver(){
     this.infoService.isTimeRunning = false;
     this.infoService.gameStatus = GameStatus.lost;
+
+
+    //Macht alle Felder sichtbar, die nicht geflaggt sind
+    //falsch geflaggte Felder werden makiert
+    for (let i = 0; i < this.arr_Fields.length; i++) {
+      for (let j = 0; j < this.arr_Fields[i].length; j++) {
+        
+        if(this.arr_Fields[i][j].isFlagged){
+
+          if (!this.arr_Fields[i][j].hasMine) 
+            this.arr_Fields[i][j].isWrongFlagged = true;
+
+          continue;
+        }
+
+        this.arr_Fields[i][j].isVisible = true;
+
+      }   
+    }
+
+
+
     console.log("Game Over");
   }
   

@@ -3,6 +3,7 @@ export class Field{
     hasMine : boolean;
     nearbyMines: number = 0;
     isFlagged : boolean ;
+    isWrongFlagged : boolean = false;
     xCord : number; //vertical     TOP-Left x=0,y=0
     yCord : number; //horizontal
 

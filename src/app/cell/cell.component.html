@@ -23,8 +23,8 @@
 
     <img *ngIf="field.isVisible && field.hasMine" 
         src="assets/emojis/mine.png">
-    <img *ngIf="!field.isVisible && field.isFlagged"
+    <img *ngIf="!field.isVisible && field.isFlagged && !field.isWrongFlagged"
         src="assets/emojis/triangularflagonpost.png">
-    
-
+    <img *ngIf="!field.isVisible && field.isWrongFlagged"
+        src="assets/emojis/triangularflagonpost-Cross.png">
 </div>
