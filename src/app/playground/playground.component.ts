@@ -63,7 +63,6 @@ export class PlaygroundComponent implements OnInit {
     this.infoService.nextTime(0); //Zeit auf null setzen
 
     //Reset Service configurieren/subscriben 
-    this.resetService.isReset.next(false); //sichergehen das false
     this.resetService.isReset.subscribe(isReset => {
       if(isReset){
         this.resetPlayground();
@@ -95,19 +94,10 @@ export class PlaygroundComponent implements OnInit {
   
   async ngOnInit(): Promise<void> {
 
-    this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
-  
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.columns; j++) {
-        this.countMinesNearbyBetter(this.arr_Fields[i][j]);  
-        
-      }
-    }
-
-    console.log("ready");
+    await this.init();
   }
 
-  resetPlayground(){
+  async resetPlayground(){
     if(this.infoService.gameLevel == GameLevel.hard){
       this.rows = 16;
       this.columns = 30;
@@ -132,13 +122,7 @@ export class PlaygroundComponent implements OnInit {
     this.infoService.isTimeRunning = false;
     this.infoService.nextTime(0); //Zeit auf null setzen
 
-    //Reset Service configurieren/subscriben 
-    this.resetService.isReset.next(false); //sichergehen das false
-    this.resetService.isReset.subscribe(isReset => {
-      if(isReset){
-        this.resetPlayground();
-      }
-    })
+
 
 
     //styles
@@ -162,7 +146,20 @@ export class PlaygroundComponent implements OnInit {
     PlaygroundComponent._playgroundPaddingStyle = this.playgroundPaddingStyle;
     
     this.arr_Fields = [];
-    this.ngOnInit();
+    await this.init();
+  }
+
+  async init(){
+    this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
+  
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.columns; j++) {
+        this.countMinesNearbyBetter(this.arr_Fields[i][j]);  
+        
+      }
+    }
+
+    console.log("ready");
   }
 
   /**Händelt den Click auf einem field (cell)
