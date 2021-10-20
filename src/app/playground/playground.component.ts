@@ -164,8 +164,6 @@ export class PlaygroundComponent implements OnInit {
         
       }
     }
-
-    console.log("ready");
   }
 
   /**Händelt den Click auf einem field (cell)
@@ -217,6 +215,7 @@ export class PlaygroundComponent implements OnInit {
     }
     
     if (this.countInvisibleFields <= this.mines && this.flagCount <= 0){ //Gewinn Bedinung
+      console.log("left")
       this.gameHasBeenWon();
     } 
     
@@ -243,6 +242,7 @@ export class PlaygroundComponent implements OnInit {
     }
 
     if (this.countInvisibleFields <= this.mines && this.flagCount <= 0){ //Gewinn Bedinung
+      console.log("right");
       this.gameHasBeenWon();
     } 
 
@@ -282,12 +282,14 @@ export class PlaygroundComponent implements OnInit {
     let highscore : HighScore;
     this.infoService.isTimeRunning = false;
     this.infoService.gameStatus = GameStatus.won;
-    this.infoService.getTime().subscribe(time => {
+    
+    let tmp = this.infoService.getTime().subscribe(time => {
       highscore = new HighScore(time);
       this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
       console.log(highscore);
     })
     console.log("Winner");
+
   }
   
   
