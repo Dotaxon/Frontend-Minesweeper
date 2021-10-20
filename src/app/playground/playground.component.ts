@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CellComponent } from '../cell/cell.component';
-import { Field } from '../Field';
+import { Field, HighScore } from '../Classes';
 import { GameLevel, GameStatus } from '../Enums';
 import { InformationService } from '../information.service';
 import { ResetService } from '../new-game-button/reset.service';
@@ -50,7 +50,7 @@ export class PlaygroundComponent implements OnInit {
     else{ //GameLevel is easy
       this.rows = 10;
       this.columns = 10;
-      this.mines = 10;
+      this.mines = 1;
     }
 
     this.flagCount = this.mines;
@@ -273,8 +273,13 @@ export class PlaygroundComponent implements OnInit {
   }
   
   gameHasBeenWon(){
+    let highscore : HighScore;
     this.infoService.isTimeRunning = false;
     this.infoService.gameStatus = GameStatus.won;
+    this.infoService.getTime().subscribe(time => {
+      highscore = new HighScore(time);
+      console.log(highscore);
+    })
     console.log("Winner");
   }
   

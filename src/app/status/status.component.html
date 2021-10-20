@@ -20,10 +20,10 @@
         <div>
             
             <img class="StatusVariables__Image" src="assets/emojis/stopwatch.png">
-            <span *ngIf="time$| async as time;else zero" class="StatusVariables__Number"> {{ time * 100 | date:'mm:ss:S' }}</span> 
+            <span *ngIf="time$| async as time;else zero" class="StatusVariables__Number"> {{ time * 1000 | date:'mm:ss' }}</span> 
             
             <ng-template #zero>
-                <span class="StatusVariables__Number">00:00:0</span>
+                <span class="StatusVariables__Number">00:00</span>
             </ng-template>
         </div>
      

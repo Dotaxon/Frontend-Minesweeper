@@ -17,3 +17,12 @@ export class Field{
         this.yCord = yCord;
     }
 }
+export class HighScore{
+
+    seconds : number;
+    
+    constructor(seconds : number) {
+        this.seconds = seconds;
+    }
+    
+}

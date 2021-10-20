@@ -28,7 +28,7 @@ export class InformationService {
 
     if (value){
       this.nextTime(0)
-      this.timerSub = timer(0,100).subscribe(x => this.nextTime(x))
+      this.timerSub = timer(0,1000).subscribe(x => this.nextTime(x))
     }
     else{
       this.timerSub?.unsubscribe();

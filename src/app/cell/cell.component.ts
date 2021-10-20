@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Field } from '../Field';
+import { Field } from '../Classes';
 import { GameStatus } from '../Enums';
 import { InformationService } from '../information.service';
 
