@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Field } from '../Classes';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { backendURL } from '../Constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaygroundService {
-
-  private readonly backendURL = "http://localhost:3000";
 
   constructor(
     private http: HttpClient
@@ -25,9 +24,9 @@ export class PlaygroundService {
    */
   private  getMineArray(rows : number, columns : number, mines : number): Observable<boolean[][]>{
     
-    let returnVal =  this.http.get<boolean[][]>(this.backendURL + "/?rows="+rows+"&columns="+columns+"&mines="+mines);
+    let returnVal =  this.http.get<boolean[][]>(backendURL + "/?rows="+rows+"&columns="+columns+"&mines="+mines);
 
-    console.log(this.backendURL +"/?rows="+rows+"&columns="+columns+"&mines="+mines);
+    console.log(backendURL +"/?rows="+rows+"&columns="+columns+"&mines="+mines);
 
     return returnVal;
   }

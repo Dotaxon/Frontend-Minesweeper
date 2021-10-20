@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CellComponent } from '../cell/cell.component';
 import { Field, HighScore } from '../Classes';
 import { GameLevel, GameStatus } from '../Enums';
+import { HighscoreService } from '../highscore.service';
 import { InformationService } from '../information.service';
 import { ResetService } from '../new-game-button/reset.service';
 import { PlaygroundService } from './playground.service';
@@ -35,8 +36,13 @@ export class PlaygroundComponent implements OnInit {
   constructor(
       private playgroundService : PlaygroundService,
       private infoService : InformationService,
-      private resetService : ResetService
+      private resetService : ResetService,
+      private highScoreService : HighscoreService,
     ) { 
+
+
+
+
     if(this.infoService.gameLevel == GameLevel.hard){
       this.rows = 30;
       this.columns = 16;
@@ -50,7 +56,7 @@ export class PlaygroundComponent implements OnInit {
     else{ //GameLevel is easy
       this.rows = 10;
       this.columns = 10;
-      this.mines = 1;
+      this.mines = 10;
     }
 
     this.flagCount = this.mines;
@@ -278,6 +284,7 @@ export class PlaygroundComponent implements OnInit {
     this.infoService.gameStatus = GameStatus.won;
     this.infoService.getTime().subscribe(time => {
       highscore = new HighScore(time);
+      this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
       console.log(highscore);
     })
     console.log("Winner");
