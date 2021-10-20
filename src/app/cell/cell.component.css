@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
     
 }
 .cell:hover{
@@ -28,4 +29,19 @@ img{
 }
 .notPlaying:hover{
     border-style: outset;
+}
+.blue{
+    color:blue;
+}
+.green{
+    color: rgb(0, 156, 0);
+}
+.red{
+    color: red;
+}
+.darkRed{
+    color: rgb(148, 0, 0);
+}
+.darkerRed{
+    color: rgb(116, 0, 0);
 }

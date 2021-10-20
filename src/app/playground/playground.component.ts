@@ -104,7 +104,7 @@ export class PlaygroundComponent implements OnInit {
       }
     }
 
-
+    console.log("ready");
   }
 
   resetPlayground(){
@@ -162,24 +162,9 @@ export class PlaygroundComponent implements OnInit {
     PlaygroundComponent._playgroundPaddingStyle = this.playgroundPaddingStyle;
     
     this.arr_Fields = [];
-    //this.resetPlaygroundAsync();
     this.ngOnInit();
   }
 
-  async resetPlaygroundAsync() : Promise<void>{
-
-    this.arr_Fields = await this.playgroundService.getFieldArray(this.rows, this.columns, this.mines);
-  
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.columns; j++) {
-        this.countMinesNearbyBetter(this.arr_Fields[i][j]);  
-        
-      }
-    }
-
-  }
-
-  
   /**Händelt den Click auf einem field (cell)
    * 
    * @param field das field welches gedrückt wurde

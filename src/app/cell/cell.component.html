@@ -10,7 +10,16 @@
         'height': cellHeight,
         'border-width' : borderWidth }"
 >
-    <span *ngIf="field.isVisible && !field.hasMine && field.nearbyMines != 0" >{{field.nearbyMines}}</span>
+    <span 
+        *ngIf="field.isVisible && !field.hasMine && field.nearbyMines != 0" 
+        [ngClass]="{
+            'blue': field.nearbyMines == 1,
+            'green' : field.nearbyMines == 2,
+            'red' : field.nearbyMines == 3,
+            'darkRed' : field.nearbyMines == 4,
+            'dearkerRed' :field.nearbyMines >=5
+        }"
+        >{{field.nearbyMines}}</span>
 
     <img *ngIf="field.isVisible && field.hasMine" 
         src="assets/emojis/mine.png">
