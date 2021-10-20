@@ -25,9 +25,9 @@ export class PlaygroundService {
    */
   private  getMineArray(rows : number, columns : number, mines : number): Observable<boolean[][]>{
     
-    let returnVal =  this.http.get<boolean[][]>("http://localhost:3000/?rows="+rows+"&columns="+columns+"&mines="+mines);
+    let returnVal =  this.http.get<boolean[][]>(this.backendURL + "/?rows="+rows+"&columns="+columns+"&mines="+mines);
 
-    console.log("http://localhost:3000/?rows="+rows+"&columns="+columns+"&mines="+mines);
+    console.log(this.backendURL +"/?rows="+rows+"&columns="+columns+"&mines="+mines);
 
     return returnVal;
   }
@@ -52,7 +52,7 @@ export class PlaygroundService {
 
         for (let j = 0; j < columns; j++) {
 
-          let field : Field = new Field(j,i,false, arr_Mines[i][j]);
+          let field : Field = new Field(j,i,false,false, arr_Mines[i][j]);
           arr_Fields[i][j] = field;
         }
     }

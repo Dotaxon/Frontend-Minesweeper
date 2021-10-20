@@ -1,9 +1,32 @@
 <div
-    class="Field"
+    class="cell"
     (click)="onClick()"
     (contextmenu)="onRightClick()"
+    [ngClass]="{'opened':field.isVisible,
+                'flagged': field.isFlagged,
+                'notPlaying' : getGameStatus() != gameStatusEnum.playing,
+                'hasBeenRightClicked' : field.hasBeenClicked && !field.hasBeenWrongClicked && getGameStatus() != gameStatusEnum.playing,
+                'hasBeenWrongClicked' : field.hasBeenWrongClicked && getGameStatus() != gameStatusEnum.playing}"
+    [ngStyle]="{
+        'width': cellWidth,
+        'height': cellHeight,
+        'border-width' : borderWidth }"
 >
-    <span *ngIf="field.isVisible && !field.hasMine" >{{field.nearbyMines}}</span>
+    <span 
+        *ngIf="field.isVisible && !field.hasMine && field.nearbyMines != 0" 
+        [ngClass]="{
+            'blue': field.nearbyMines == 1,
+            'green' : field.nearbyMines == 2,
+            'red' : field.nearbyMines == 3,
+            'darkRed' : field.nearbyMines == 4,
+            'darkerRed' :field.nearbyMines >=5
+        }"
+        >{{field.nearbyMines}}</span>
 
-    <span *ngIf="field.isVisible && field.hasMine">Mine</span>
+    <img *ngIf="field.isVisible && field.hasMine" 
+        src="assets/emojis/mine.png">
+    <img *ngIf="!field.isVisible && field.isFlagged && !field.isWrongFlagged"
+        src="assets/emojis/triangularflagonpost.png">
+    <img *ngIf="!field.isVisible && field.isWrongFlagged"
+        src="assets/emojis/triangularflagonpost-Cross.png">
 </div>

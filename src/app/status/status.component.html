@@ -1,0 +1,32 @@
+<div class="StatusContainer">
+    <div class="Difficulty">
+            <select class="Difficulty__DropDown" [(ngModel)]="this.infoService.gameLevel">
+                <option [value]="gameLevelEnum.easy">Easy</option>
+                <option [value]="gameLevelEnum.normal">Normal</option>
+                <option [value]="gameLevelEnum.hard">Hard</option>
+            </select>
+    </div>
+    <div class="Status" [ngSwitch]="getGameStatus()">
+        <img class="StatusEmoji" *ngSwitchCase="gameStatusEnum.playing" src="assets/emojis/playing-emoji.png">
+        <img class="StatusEmoji" *ngSwitchCase="gameStatusEnum.won" src="assets/emojis/won-emoji.png">
+        <img class="StatusEmoji" *ngSwitchCase="gameStatusEnum.lost" src="assets/emojis/lost-emoji.png">
+    </div>
+    <div class="StatusVariables">
+
+        <div>
+            <img class="StatusVariables__Image" src="assets/emojis/triangularflagonpost.png">
+            <span class="StatusVariables__Number">{{valueFlags}}</span>
+        </div>
+        <div>
+            
+            <img class="StatusVariables__Image" src="assets/emojis/stopwatch.png">
+            <span *ngIf="time$| async as time;else zero" class="StatusVariables__Number"> {{ time * 100 | date:'mm:ss:S' }}</span> 
+            
+            <ng-template #zero>
+                <span class="StatusVariables__Number">00:00:0</span>
+            </ng-template>
+        </div>
+     
+    </div>
+</div>
+

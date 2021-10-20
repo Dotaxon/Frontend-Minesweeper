@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Field } from '../Field';
-import { PlaygroundService } from '../playground/playground.service';
+import { GameStatus } from '../Enums';
+import { InformationService } from '../information.service';
+
 
 @Component({
   selector: 'app-cell',
@@ -9,24 +11,67 @@ import { PlaygroundService } from '../playground/playground.service';
 })
 export class CellComponent implements OnInit {
 
-  constructor(
-    private playgroundService : PlaygroundService
-  ) { }
+  private static _cellWidth: string = "34px";
+  private static _cellHeight: string = "34px";
+  borderWidth : string = "3.5px";
+  gameStatusEnum = GameStatus;
   
   @Input() field! : Field;
-  @Output() emitter = new EventEmitter<Field>();
+  @Output() leftClickEmitter = new EventEmitter<Field>();
+  @Output() rightClickEmitter = new EventEmitter<Field>();
+  
+  
+  constructor(private infoService : InformationService) { 
 
+
+  }
+  
+  
+  
+  
   ngOnInit(): void {
   }
-
+  
   onClick(){
-    //this.field.isVisible=true;
-    this.emitter.emit(this.field);
-    console.log(this.field); 
+    this.leftClickEmitter.emit(this.field);
   }
-
+  
+  /**Reagiert auf rechtsklick
+   * 
+   * @returns wenn false wird das Contextmenu des Browsers unterdrückt
+   */
   onRightClick(){
-    return false;
+    this.rightClickEmitter.emit(this.field);
+
+    return false; 
+  }
+  
+  getGameStatus(){
+    return this.infoService.gameStatus;
   }
 
+  public get cellHeight(): string {
+    return CellComponent._cellHeight;
+  }
+  public set cellHeight(value: string) {
+    CellComponent._cellHeight = value;
+  }
+  public get cellWidth(): string {
+    return CellComponent._cellWidth;
+  }
+  public set cellWidth(value: string) {
+    CellComponent._cellWidth = value;
+  }
+  public static get cellHeight(): string {
+    return CellComponent._cellHeight;
+  }
+  public static set cellHeight(value: string) {
+    CellComponent._cellHeight = value;
+  }
+  public static get cellWidth(): string {
+    return CellComponent._cellWidth;
+  }
+  public static set cellWidth(value: string) {
+    CellComponent._cellWidth = value;
+  }
 }

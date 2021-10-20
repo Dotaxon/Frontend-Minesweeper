@@ -1,0 +1,57 @@
+.StatusContainer{
+    display: flex;
+    background-color: rgb(212, 212, 212);
+    margin: 8px;
+    margin-bottom: 3px;
+    height: 50px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-style: groove;
+    border-width: 2px;
+}
+.StatusEmoji{
+    width:100%;
+    height:100%;
+}
+.Status{
+    width: 40px;
+    height: 40px;
+}
+.Difficulty{
+    height: 40px;
+    width: 40%;
+    
+}
+.Difficulty__DropDown{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    height: 100%;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 130%;
+    color: rgb(58, 58, 58);
+    background-color: rgb(243, 243, 243);
+}
+.StatusVariables{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40px;
+    width: 40%;
+}
+
+.StatusVariables__Image{
+    height:25px;
+    width: 25px;
+}
+.StatusVariables__Number{
+    color: rgb(0, 0, 0);
+    min-height:25px;
+    vertical-align: middle;
+    margin-left: 3px;
+    margin-right: 3px;
+
+}
