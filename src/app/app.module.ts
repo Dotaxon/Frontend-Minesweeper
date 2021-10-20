@@ -9,6 +9,7 @@ import { CellComponent } from './cell/cell.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewGameButtonComponent } from './new-game-button/new-game-button.component';
 import { StatusComponent } from './status/status.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StatusComponent } from './status/status.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,10 @@
 <div class="StatusContainer">
     <div class="Difficulty">
-        Difficulty
+            <select class="Difficulty__DropDown" [(ngModel)]="this.infoService.gameLevel">
+                <option [value]="gameLevelEnum.easy">Easy</option>
+                <option [value]="gameLevelEnum.normal">Normal</option>
+                <option [value]="gameLevelEnum.hard">Hard</option>
+            </select>
     </div>
     <div class="Status" [ngSwitch]="getGameStatus()">
         <img class="StatusEmoji" *ngSwitchCase="gameStatusEnum.playing" src="assets/emojis/playing-emoji.png">

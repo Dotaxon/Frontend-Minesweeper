@@ -3,3 +3,8 @@ export enum GameStatus{
     lost = 'LOST',
     playing = 'PLAYING'
 }
+export enum GameLevel{
+    easy = 'EASY',
+    normal = 'NORMAL',
+    hard = 'HARD'
+}
