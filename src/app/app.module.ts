@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 @NgModule({
@@ -33,7 +33,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     FormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatFormFieldModule
+    
 
   ],
   providers: [],
