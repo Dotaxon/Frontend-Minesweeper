@@ -20,9 +20,11 @@ export class Field{
 export class HighScore{
 
     seconds : number;
-    
-    constructor(seconds : number) {
+    name : string;
+
+    constructor(seconds : number, name :string) {
         this.seconds = seconds;
+        this.name = name;
     }
     
 }

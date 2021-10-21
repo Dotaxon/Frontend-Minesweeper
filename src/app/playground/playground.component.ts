@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable, of } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { CellComponent } from '../cell/cell.component';
 import { Field, HighScore } from '../Classes';
+import { DialogComponent } from '../dialog/dialog.component';
 import { GameLevel, GameStatus } from '../Enums';
 import { HighscoreService } from '../highscore.service';
 import { InformationService } from '../information.service';
@@ -38,6 +42,7 @@ export class PlaygroundComponent implements OnInit {
       private infoService : InformationService,
       private resetService : ResetService,
       private highScoreService : HighscoreService,
+      public dialog : MatDialog,
     ) { 
 
 
@@ -117,7 +122,7 @@ export class PlaygroundComponent implements OnInit {
     else{ //GameLevel is easy
       this.rows = 10;
       this.columns = 10;
-      this.mines = 10;
+      this.mines = 1;
     }
     this.flagCount = this.mines;
     this.countInvisibleFields = this.rows * this.columns;
@@ -215,7 +220,6 @@ export class PlaygroundComponent implements OnInit {
     }
     
     if (this.countInvisibleFields <= this.mines && this.flagCount <= 0){ //Gewinn Bedinung
-      console.log("left")
       this.gameHasBeenWon();
     } 
     
@@ -242,7 +246,6 @@ export class PlaygroundComponent implements OnInit {
     }
 
     if (this.countInvisibleFields <= this.mines && this.flagCount <= 0){ //Gewinn Bedinung
-      console.log("right");
       this.gameHasBeenWon();
     } 
 
@@ -279,20 +282,38 @@ export class PlaygroundComponent implements OnInit {
   }
   
   async gameHasBeenWon(){
+    let time : number
+    let name : string;
     let highscore : HighScore;
     this.infoService.isTimeRunning = false;
     this.infoService.gameStatus = GameStatus.won;
     
-    let tmp = await this.infoService.getTime().subscribe(time => {
-      highscore = new HighScore(time);
-      this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
-      console.log(highscore);
-    })
-    tmp.unsubscribe();
+    time = await this.infoService.getTime().pipe(first()).toPromise();
+    
+    name = await this.openHighScoreDialog(time).pipe(first()).toPromise();
+    
+    highscore = new HighScore(time,name);
+    this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
+    console.log(highscore);
     console.log("Winner");
 
   }
   
+  /**
+   * 
+   * @param timeSeconds 
+   * @returns 
+   */
+  openHighScoreDialog(timeSeconds : number): Observable<any>{
+    const dialogRef = this.dialog.open(DialogComponent,{
+      width : '250px',
+      data : { time : timeSeconds , name : undefined}
+    })
+    let name = dialogRef.afterClosed();
+
+    return name;
+
+  }
   
   /**Zählt die Anzahl an Feldern in einem 3mal3 Radius 
    * um ein Feld

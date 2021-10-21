@@ -12,6 +12,8 @@ import { StatusComponent } from './status/status.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     PlaygroundComponent,
     CellComponent,
     NewGameButtonComponent,
-    StatusComponent
+    StatusComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule
 
   ],
   providers: [],
