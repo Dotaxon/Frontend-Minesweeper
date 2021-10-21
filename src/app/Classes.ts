@@ -1,3 +1,5 @@
+import { GameLevel } from "./Enums";
+
 export class Field{
     isVisible : boolean;
     hasMine : boolean;
@@ -21,10 +23,12 @@ export class HighScore{
 
     seconds : number;
     name : string;
+    difficulty : GameLevel;
 
-    constructor(seconds : number, name :string) {
+    constructor(seconds : number, name :string, gameLevel : GameLevel) {
         this.seconds = seconds;
         this.name = name;
+        this.difficulty = gameLevel;
     }
     
 }

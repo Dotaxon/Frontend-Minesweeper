@@ -61,7 +61,7 @@ export class PlaygroundComponent implements OnInit {
     else{ //GameLevel is easy
       this.rows = 10;
       this.columns = 10;
-      this.mines = 1;
+      this.mines = 10;
     }
 
     this.flagCount = this.mines;
@@ -122,7 +122,7 @@ export class PlaygroundComponent implements OnInit {
     else{ //GameLevel is easy
       this.rows = 10;
       this.columns = 10;
-      this.mines = 1;
+      this.mines = 10;
     }
     this.flagCount = this.mines;
     this.countInvisibleFields = this.rows * this.columns;
@@ -292,7 +292,7 @@ export class PlaygroundComponent implements OnInit {
     
     name = await this.openHighScoreDialog(time).pipe(first()).toPromise();
     
-    highscore = new HighScore(time,name);
+    highscore = new HighScore(time,name, this.infoService.gameLevel);
     this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
     console.log(highscore);
     console.log("Winner");
