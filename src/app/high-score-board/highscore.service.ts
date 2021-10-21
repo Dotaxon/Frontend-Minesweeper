@@ -21,6 +21,9 @@ export class HighscoreService {
   }
 
   getHighScorePartWithGameLevel(count : number ,filter : GameLevel) : Observable<any>{
-    return this.http.get(backendURL + "/highscore/" + count + "/" + filter)
+    let tmp = this.http.get(backendURL + "/highscore/" + count + "/" + filter);
+    tmp.subscribe(s => console.log(s));
+    console.log(backendURL + "/highscore/" + count + "/" + filter)
+    return tmp;
   }
 }

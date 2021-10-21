@@ -18,7 +18,7 @@ export class HighScoreBoardComponent implements OnInit {
   constructor(
     private highScoreService : HighscoreService
   ) {
-
+    this.refresh();
    }
 
   ngOnInit(): void {
