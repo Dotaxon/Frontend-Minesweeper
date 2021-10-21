@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewGameButtonComponent } from './new-game-button/new-game-button.component';
 import { StatusComponent } from './status/status.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
