@@ -1,0 +1,30 @@
+<h1 mat-dialog-title 
+    [ngStyle]="{
+    'text-align' : 'center'
+    }"
+  >You Won</h1>
+<div mat-dialog-content>
+
+  <p 
+    [ngStyle]="{'font-size' : '19px'}"
+    >Your Score is: {{data.time*1000 | date:'mm:ss'}}</p>
+  
+  
+    <span>What's your name?</span>
+
+    <input matInput [(ngModel)]="data.name" placeholder="Name">
+
+</div>
+<div mat-dialog-actions
+  [ngStyle]="{
+    'display' : 'flex',
+    'justify-content' : 'center'
+  }"
+  >
+  <button mat-button 
+      [mat-dialog-close]="data.name" 
+      cdkFocusInitial
+      [ngStyle]="{
+        'width' : '30%'}"
+    >Ok</button>
+</div>
