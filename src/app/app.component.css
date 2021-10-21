@@ -9,16 +9,24 @@
 
     
 }
-
+h1{
+    font-size: 35px;
+    margin-top: 10px;
+}
 .Canvas{
     color:rgb(168, 168, 168);
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    max-height: fit-content;
 }
 #content{
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
+}
+#highScores{
+    color:rgb(224, 224, 224);
+    margin-top: 20px;
+    height: 80px;
 }

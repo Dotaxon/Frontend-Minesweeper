@@ -6,7 +6,7 @@ import { CellComponent } from '../cell/cell.component';
 import { Field, HighScore } from '../Classes';
 import { DialogComponent } from '../dialog/dialog.component';
 import { GameLevel, GameStatus } from '../Enums';
-import { HighscoreService } from '../highscore.service';
+import { HighscoreService } from '../high-score-board/highscore.service';
 import { InformationService } from '../information.service';
 import { ResetService } from '../new-game-button/reset.service';
 import { PlaygroundService } from './playground.service';
