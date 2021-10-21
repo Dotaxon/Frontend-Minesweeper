@@ -56,7 +56,7 @@ export class PlaygroundComponent implements OnInit {
     else{ //GameLevel is easy
       this.rows = 10;
       this.columns = 10;
-      this.mines = 10;
+      this.mines = 1;
     }
 
     this.flagCount = this.mines;
@@ -278,16 +278,17 @@ export class PlaygroundComponent implements OnInit {
     console.log("Game Over");
   }
   
-  gameHasBeenWon(){
+  async gameHasBeenWon(){
     let highscore : HighScore;
     this.infoService.isTimeRunning = false;
     this.infoService.gameStatus = GameStatus.won;
     
-    let tmp = this.infoService.getTime().subscribe(time => {
+    let tmp = await this.infoService.getTime().subscribe(time => {
       highscore = new HighScore(time);
       this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
       console.log(highscore);
     })
+    tmp.unsubscribe();
     console.log("Winner");
 
   }
