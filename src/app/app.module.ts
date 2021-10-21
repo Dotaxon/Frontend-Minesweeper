@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { HighScoreBoardComponent } from './high-score-board/high-score-board.component';
 
 
 
@@ -23,7 +24,8 @@ import { DialogComponent } from './dialog/dialog.component';
     CellComponent,
     NewGameButtonComponent,
     StatusComponent,
-    DialogComponent
+    DialogComponent,
+    HighScoreBoardComponent
   ],
   imports: [
     BrowserModule,
