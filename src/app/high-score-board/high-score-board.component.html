@@ -2,21 +2,21 @@
 <div class="HighScoreContainer">
     <div class="HighScoreColumn">
         <span class="HighScoreComponentTitle">Easy</span>
-        <div *ngFor="let element of this.arr_Easy" class="HighScoreComponent">
+        <div *ngFor="let element of this.highScoreService.arr_Easy" class="HighScoreComponent">
             {{element.name}} <br>
             {{element.seconds*1000 | date:'mm:ss'}}
         </div>
     </div>
     <div class="HighScoreColumn">
         <span class="HighScoreComponentTitle">Normal</span>
-        <div *ngFor="let element of this.arr_Easy" class="HighScoreComponent">
+        <div *ngFor="let element of this.highScoreService.arr_Normal" class="HighScoreComponent">
             {{element.name}} <br>
             {{element.seconds*1000 | date:'mm:ss'}}
         </div>
     </div>
     <div class="HighScoreColumn">
         <span class="HighScoreComponentTitle">Hard</span>
-        <div *ngFor="let element of this.arr_Easy" class="HighScoreComponent">
+        <div *ngFor="let element of this.highScoreService.arr_Hard" class="HighScoreComponent">
             {{element.name}} <br>
             {{element.seconds*1000 | date:'mm:ss'}}
         </div>

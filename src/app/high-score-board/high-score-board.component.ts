@@ -11,29 +11,17 @@ import { HighscoreService } from './highscore.service';
 })
 export class HighScoreBoardComponent implements OnInit {
 
-  arr_Easy : HighScore[] = [new HighScore(22,'v',GameLevel.easy)];
-  arr_Normal : HighScore[] = [new HighScore(22,'v',GameLevel.normal)];
-  arr_Hard : HighScore[] = [new HighScore(22,'v',GameLevel.hard)];
+
 
   constructor(
-    private highScoreService : HighscoreService
+    public highScoreService : HighscoreService
   ) {
-    this.refresh();
+    this.highScoreService.refresh();
    }
 
   ngOnInit(): void {
-    console.log(this.arr_Easy);
+    this.highScoreService.refresh();
   }
 
-  /**Doe not work
-   * Refreshes the Arrays
-   */
-  refresh() : void{
-    //Gets arr_Easy
-    this.highScoreService.getHighScorePartWithGameLevel(5, GameLevel.easy).pipe(first()).toPromise().then(arr => this.arr_Easy = arr);
-    //Gets arr_Normal
-    this.highScoreService.getHighScorePartWithGameLevel(5, GameLevel.normal).pipe(first()).toPromise().then(arr => this.arr_Normal = arr);
-    //Gets arr_Hard
-    this.highScoreService.getHighScorePartWithGameLevel(5, GameLevel.hard).pipe(first()).toPromise().then(arr => this.arr_Hard = arr);
-  }
+
 }

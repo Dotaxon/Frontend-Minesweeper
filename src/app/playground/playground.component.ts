@@ -134,7 +134,8 @@ export class PlaygroundComponent implements OnInit {
     this.infoService.nextTime(0); //Zeit auf null setzen
 
 
-
+    //HighScoreBoard refreshen
+    this.highScoreService.refresh();
 
     //styles
     for (let i = 0; i < this.columns; i++) //um columnsStyleString zu erstellen 
@@ -288,12 +289,21 @@ export class PlaygroundComponent implements OnInit {
     this.infoService.isTimeRunning = false;
     this.infoService.gameStatus = GameStatus.won;
     
+    //Zeit Holen
     time = await this.infoService.getTime().pipe(first()).toPromise();
     
+    //Warten bis der Dialog wieder geschlossen ist
     name = await this.openHighScoreDialog(time).pipe(first()).toPromise();
     
+    //Highscore erstellen
     highscore = new HighScore(time,name, this.infoService.gameLevel);
-    this.highScoreService.addHighScore(highscore).subscribe(s => console.log(s));
+    
+    //Warten bis der HighScore im Backend ist
+    await this.highScoreService.addHighScore(highscore).toPromise();
+    
+    //Highscore Board Refreshen
+    this.highScoreService.refresh();
+
     console.log(highscore);
     console.log("Winner");
 
