@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { HighScore } from '../Classes';
+import { GameLevel } from '../Enums';
+import { HighscoreService } from './highscore.service';
 
 @Component({
   selector: 'app-high-score-board',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HighScoreBoardComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(
+    public highScoreService : HighscoreService
+  ) {
+    this.highScoreService.refresh();
+   }
 
   ngOnInit(): void {
+    this.highScoreService.refresh();
   }
+
 
 }
