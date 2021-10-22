@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { HighScoreBoardComponent } from './high-score-board/high-score-board.component';
-import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -35,8 +34,7 @@ import {MatTableModule} from '@angular/material/table';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    MatTableModule,
+    MatDialogModule
 
   ],
   providers: [],

@@ -11,9 +11,9 @@ import { GameLevel } from '../Enums';
 })
 export class HighscoreService {
 
-  arr_Easy : HighScore[] = [new HighScore(22,'v',GameLevel.easy)];
-  arr_Normal : HighScore[] = [new HighScore(22,'v',GameLevel.normal)];
-  arr_Hard : HighScore[] = [new HighScore(22,'v',GameLevel.hard)];
+  arr_Easy : HighScore[] = [];
+  arr_Normal : HighScore[] = [];
+  arr_Hard : HighScore[] = [];
 
   constructor(
     private http : HttpClient
@@ -32,7 +32,7 @@ export class HighscoreService {
     return tmp;
   }
 
-    /**Doe not work
+   /**
    * Refreshes the Arrays
    */
      refresh() : void{

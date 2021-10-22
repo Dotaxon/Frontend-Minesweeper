@@ -41,9 +41,8 @@ export class PlaygroundService {
    */
   async getFieldArray(rows : number, columns : number, mines : number): Promise<Field[][]>{
     let arr_Fields : Field[][] = [];
-    let arr_Mines : boolean[][];
-    arr_Mines = await this.getMineArray(rows,columns,mines).toPromise();
-  
+    let arr_Mines : boolean[][] = await this.getMineArray(rows,columns,mines).toPromise();
+
     
       
     for (let i = 0; i < rows; i++) {

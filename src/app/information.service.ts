@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, interval, Observable, Subscription, timer} from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
 import { GameLevel, GameStatus } from './Enums';
 
 @Injectable({

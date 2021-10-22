@@ -340,9 +340,10 @@ export class PlaygroundComponent implements OnInit {
       for (let j = -1; j <=1; j++) {
         if (i == 0 && j == 0) continue;
         try {
-          if (this.arr_Fields[y+i][x+j].hasMine) count++;
-          
-          
+          if (this.arr_Fields[y+i][x+j].hasMine){
+            count++;
+          } 
+                   
         } catch (error) {}          
       }     
     }

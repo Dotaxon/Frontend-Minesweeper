@@ -22,11 +22,7 @@ export class CellComponent implements OnInit {
   
   
   constructor(private infoService : InformationService) { 
-
-
   }
-  
-  
   
   
   ngOnInit(): void {
